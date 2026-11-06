@@ -1,0 +1,57 @@
+[h264 @ 000001e3e409c400] left block unavailable for requested intra mode
+[h264 @ 000001e3e409c400] error while decoding MB 0 63, bytestream 346
+[h264 @ 000001e3e409c400] error while decoding MB 97 61, bytestream -8
+[h264 @ 000001e3e40feb00] left block unavailable for requested intra mode
+[h264 @ 000001e3e40feb00] error while decoding MB 0 61, bytestream 694
+[h264 @ 000001e3e5e9b140] error while decoding MB 117 61, bytestream -14
+[h264 @ 000001e3e5a47200] cabac decode of qscale diff failed at 77 57
+[h264 @ 000001e3e5a47200] error while decoding MB 77 57, bytestream 12
+[h264 @ 000001e3e82a7300] error while decoding MB 84 60, bytestream -8
+[h264 @ 000001e3e34c2ec0] left block unavailable for requested intra mode
+[h264 @ 000001e3e34c2ec0] error while decoding MB 0 51, bytestream 352
+[h264 @ 000001e3e35ae040] error while decoding MB 86 63, bytestream -6
+[h264 @ 000001e3e5435040] left block unavailable for requested intra4x4 mode -1
+[h264 @ 000001e3e5435040] error while decoding MB 0 50, bytestream 542
+[h264 @ 000001e3e88e38c0] error while decoding MB 66 60, bytestream -18
+[h264 @ 000001e3e5a44840] error while decoding MB 72 51, bytestream -10
+[h264 @ 000001e3e7aae4c0] error while decoding MB 104 55, bytestream -7
+[h264 @ 000001e3e53f6700] left block unavailable for requested intra mode
+[h264 @ 000001e3e53f6700] error while decoding MB 0 59, bytestream 558
+[h264 @ 000001e3e5e9acc0] left block unavailable for requested intra mode
+[h264 @ 000001e3e5e9acc0] error while decoding MB 0 60, bytestream 352
+[h264 @ 000001e3e5e96040] left block unavailable for requested intra mode
+[h264 @ 000001e3e5e96040] error while decoding MB 0 55, bytestream 536
+[h264 @ 000001e3e394e840] cabac decode of qscale diff failed at 115 56
+[h264 @ 000001e3e394e840] error while decoding MB 115 56, bytestream 56
+[h264 @ 000001e3e82a9040] cabac decode of qscale diff failed at 108 57
+[h264 @ 000001e3e82a9040] error while decoding MB 108 57, bytestream 53158
+[h264 @ 000001e3e3911b40] error while decoding MB 70 50, bytestream 312
+[h264 @ 000001e3e5e9b140] cabac decode of qscale diff failed at 65 60
+[h264 @ 000001e3e5e9b140] error while decoding MB 65 60, bytestream 586
+[h264 @ 000001e3e5b33a80] error while decoding MB 80 64, bytestream -8
+[h264 @ 000001e3e58e49c0] error while decoding MB 53 60, bytestream -6
+[h264 @ 000001e3e88fe680] left block unavailable for requested intra mode
+[h264 @ 000001e3e88fe680] error while decoding MB 0 67, bytestream 508
+[h264 @ 000001e3e88feb00] error while decoding MB 75 56, bytestream -11
+[h264 @ 000001e3e53ec7c0] cabac decode of qscale diff failed at 111 56
+[h264 @ 000001e3e53ec7c0] error while decoding MB 111 56, bytestream 62
+[h264 @ 000001e3e45b2300] left block unavailable for requested intra mode
+[h264 @ 000001e3e45b2300] error while decoding MB 0 55, bytestream 398
+[h264 @ 000001e3e45b2c40] error while decoding MB 20 57, bytestream -10
+[h264 @ 000001e3e45b30c0] error while decoding MB 37 46, bytestream -14
+[h264 @ 000001e3e45b4c00] left block unavailable for requested intra mode
+[h264 @ 000001e3e45b4c00] error while decoding MB 0 56, bytestream 904
+[rtsp @ 000001e3e35ae9c0] Missed some packets, discarding frame
+[h264 @ 000001e3e45b5540] left block unavailable for requested intra mode
+[h264 @ 000001e3e45b5540] error while decoding MB 0 60, bytestream 52814
+[h264 @ 000001e3e45b2300] error while decoding MB 105 57, bytestream 64
+[h264 @ 000001e3e7cf3740] error while decoding MB 89 56, bytestream 358
+[h264 @ 000001e3e45a6fc0] error while decoding MB 21 59, bytestream -10
+[h264 @ 000001e3e56bf980] error while decoding MB 98 59, bytestream -6
+[h264 @ 000001e3e554b4c0] error while decoding MB 85 55, bytestream -14
+[h264 @ 000001e3e5549e00] left block unavailable for requested intra4x4 mode -1
+[h264 @ 000001e3e5549e00] error while decoding MB 0 49, bytestream 12841
+[h264 @ 000001e3e3e3ae40] error while decoding MB 67 66, bytestream 110
+[h264 @ 000001e3e3e392c0] error while decoding MB 52 60, bytestream -6
+[h264 @ 000001e3e3e3ae40] error while decoding MB 83 58, bytestream -10
+[h264 @ 000001e3e3e3b740] left block unavailable for re

@@ -1,0 +1,15 @@
+2026-11-06 22:42:15,701 DEBUG - Starting WinSW in console mode
+2026-11-06 22:42:27,941 DEBUG - Starting WinSW in console mode
+2026-11-06 22:42:27,977 INFO  - Installing service 'EZVIZ Event Gallery (EZVIZEventGallery)'...
+2026-11-06 22:42:28,054 INFO  - Service 'EZVIZ Event Gallery (EZVIZEventGallery)' was installed successfully.
+2026-11-06 22:42:28,591 DEBUG - Starting WinSW in console mode
+2026-11-06 22:42:28,612 INFO  - Starting service 'EZVIZ Event Gallery (EZVIZEventGallery)'...
+2026-11-06 22:42:28,792 DEBUG - Starting WinSW in service mode
+2026-11-06 22:42:28,812 INFO  - Service 'EZVIZ Event Gallery (EZVIZEventGallery)' started successfully.
+2026-11-06 22:42:28,829 INFO  - Starting C:\Users\Konda\Documents\EZVIZ-Event-Gallery\services\..\runtime\Scripts\python.exe "C:\Users\Konda\Documents\EZVIZ-Event-Gallery\services\..\app.py"
+2026-11-06 22:42:28,904 INFO  - Started process 19760
+2026-11-06 22:42:28,917 DEBUG - Forwarding logs of the process System.Diagnostics.Process (python) to WinSW.RollingSizeTimeLogAppender
+2026-11-06 22:44:14,601 DEBUG - Starting WinSW in service mode
+2026-11-06 22:44:14,623 INFO  - Starting C:\Users\Konda\Documents\EZVIZ-Event-Gallery\services\..\runtime\Scripts\python.exe "C:\Users\Konda\Documents\EZVIZ-Event-Gallery\services\..\app.py"
+2026-11-06 22:44:14,647 INFO  - Started process 2412
+2026-11-06 22:44:14,656 DEBUG - Forwarding logs of the process System.Diagnostics.Process (python) to WinSW.RollingSizeTimeLogAppender

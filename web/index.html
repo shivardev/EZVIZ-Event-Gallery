@@ -1,0 +1,330 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#101412">
+  <title>Home Activity | EZVIZ</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #101412;
+      --surface: #181e1b;
+      --surface-2: #202824;
+      --line: #303a34;
+      --text: #f1f4ef;
+      --muted: #9ba79e;
+      --green: #a8e6b4;
+      --green-ink: #162019;
+      --danger: #e6a58a;
+      --radius: 20px;
+    }
+    * { box-sizing: border-box; }
+    html { scrollbar-gutter: stable; }
+    body {
+      min-height: 100vh;
+      margin: 0;
+      background: radial-gradient(ellipse at 50% -20%, #26352b 0, transparent 42%), var(--bg);
+      color: var(--text);
+      font: 15px/1.5 Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+    }
+    button, input { font: inherit; }
+    button { color: inherit; }
+    .shell { max-width: 1100px; margin: auto; padding: 0 28px 72px; }
+    .topbar { display: flex; align-items: center; justify-content: space-between; padding: 25px 0 22px; border-bottom: 1px solid #ffffff12; }
+    .brand { display: flex; align-items: center; gap: 11px; font-size: 14px; font-weight: 750; letter-spacing: .04em; }
+    .brand-mark { width: 34px; height: 34px; display: grid; place-items: center; border-radius: 12px; background: var(--green); color: #17221a; }
+    .brand-mark svg { width: 19px; height: 19px; }
+    .live { display: flex; align-items: center; gap: 9px; color: var(--muted); font-size: 13px; }
+    .live-dot { width: 8px; height: 8px; flex: none; border-radius: 50%; background: var(--green); box-shadow: 0 0 12px #a8e6b477; }
+    .live.offline .live-dot { background: var(--danger); box-shadow: none; }
+    .intro { padding: 35px 0 25px; }
+    .eyebrow { color: var(--green); font-size: 11px; font-weight: 750; letter-spacing: .17em; text-transform: uppercase; }
+    .intro-row { display: flex; justify-content: space-between; align-items: end; gap: 20px; margin-top: 7px; }
+    .intro h1 { margin: 0; font-size: clamp(30px, 5vw, 44px); font-weight: 650; line-height: 1.08; letter-spacing: -.045em; }
+    .intro p { margin: 10px 0 0; color: var(--muted); font-size: 14px; }
+    .today-count { padding-bottom: 4px; color: var(--muted); font-size: 13px; white-space: nowrap; }
+    .today-count strong { margin-right: 5px; color: var(--text); font-size: 18px; }
+    .updated { display: block; margin-top: 2px; color: #707c73; font-size: 11px; text-align: right; }
+    .toolbar { display: flex; align-items: center; justify-content: space-between; gap: 14px; flex-wrap: wrap; margin-bottom: 30px; padding: 16px; background: #171d19cc; border: 1px solid #ffffff10; border-radius: 18px; }
+    .filters { display: flex; gap: 7px; flex-wrap: wrap; }
+    .filter { padding: 8px 14px; border: 1px solid transparent; border-radius: 999px; background: transparent; color: var(--muted); cursor: pointer; font-size: 13px; transition: .18s; }
+    .filter:hover { background: #ffffff0a; color: var(--text); }
+    .filter:focus-visible { outline: 2px solid var(--green); outline-offset: 2px; }
+    .filter.active { background: var(--green); color: var(--green-ink); font-weight: 700; }
+    .date-control { display: flex; align-items: center; gap: 9px; color: var(--muted); font-size: 13px; }
+    .date-control input { padding: 8px 10px; border: 1px solid #ffffff14; border-radius: 11px; outline: none; background: var(--surface-2); color: var(--text); color-scheme: dark; }
+    .date-control input:focus { border-color: var(--green); }
+    .timeline { max-width: 820px; margin: 0 auto; }
+    .day-heading { display: flex; align-items: center; gap: 14px; margin: 36px 0 18px; }
+    .day-heading:first-child { margin-top: 0; }
+    .day-heading::after { content: ""; height: 1px; flex: 1; background: linear-gradient(90deg, var(--line), transparent); }
+    .day-label { color: #d6ded7; font-size: 12px; font-weight: 750; letter-spacing: .12em; text-transform: uppercase; }
+    .day-label span { margin-left: 8px; color: var(--muted); font-weight: 500; letter-spacing: 0; text-transform: none; }
+    .day-total { color: #7f8a82; font-size: 11px; white-space: nowrap; }
+    .entry { position: relative; display: grid; grid-template-columns: 76px 1fr; gap: 20px; padding-bottom: 24px; }
+    .entry::before { content: ""; position: absolute; left: 79px; top: 14px; bottom: -2px; width: 1px; background: var(--line); }
+    .entry:last-child::before { display: none; }
+    .time { position: relative; padding-top: 8px; color: var(--muted); font-size: 12px; font-variant-numeric: tabular-nums; text-align: right; }
+    .time::after { content: ""; position: absolute; z-index: 1; right: -24px; top: 13px; width: 9px; height: 9px; border: 2px solid var(--green); border-radius: 50%; background: #202a23; box-shadow: 0 0 0 5px var(--bg); }
+    .event-card { display: block; width: 100%; padding: 0; overflow: hidden; border: 1px solid #ffffff12; border-radius: var(--radius); background: linear-gradient(145deg, #1b221e, #171c19); color: inherit; text-align: left; cursor: zoom-in; transition: transform .2s, border-color .2s, box-shadow .2s; }
+    .event-card:hover { transform: translateY(-2px); border-color: #a8e6b455; box-shadow: 0 14px 36px #0003; }
+    .event-card:focus-visible { outline: 3px solid var(--green); outline-offset: 3px; }
+    .media-wrap { position: relative; overflow: hidden; background: #202824; }
+    .media { display: block; width: 100%; max-height: 480px; aspect-ratio: 16/9; object-fit: cover; transition: transform .5s; }
+    .event-card:hover .media { transform: scale(1.015); }
+    .media.activity { object-fit: contain; background: #111613; }
+    .media-tag { position: absolute; left: 14px; top: 14px; display: flex; align-items: center; gap: 7px; padding: 6px 10px; border: 1px solid #ffffff1b; border-radius: 999px; background: #101512dc; backdrop-filter: blur(8px); font-size: 11px; font-weight: 720; letter-spacing: .035em; }
+    .event-icon { display: grid; place-items: center; width: 17px; height: 17px; border-radius: 50%; }
+    .event-icon svg { width: 11px; height: 11px; }
+    .event-icon.person { background: #dce9fb; color: #243950; }
+    .event-icon.cat { background: #f2dfbd; color: #49351b; }
+    .event-icon.activity { background: #c8e6cd; color: #233d29; }
+    .open-cue { position: absolute; right: 14px; top: 14px; width: 32px; height: 32px; display: grid; place-items: center; border: 1px solid #ffffff1b; border-radius: 10px; background: #101512bd; backdrop-filter: blur(8px); opacity: 0; transform: translateY(3px); transition: .2s; }
+    .event-card:hover .open-cue, .event-card:focus-visible .open-cue { opacity: 1; transform: none; }
+    .open-cue svg { width: 14px; }
+    .card-info { padding: 14px 17px 16px; }
+    .card-title-row { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+    .card-title { font-size: 15px; font-weight: 680; letter-spacing: -.01em; }
+    .card-subtitle { margin-top: 3px; color: var(--muted); font-size: 12px; }
+    .confidence { color: var(--muted); font-size: 12px; white-space: nowrap; }
+    .empty { max-width: 620px; margin: 50px auto; padding: 48px 24px; border: 1px dashed #ffffff22; border-radius: 22px; color: var(--muted); text-align: center; }
+    .empty-icon { width: 50px; height: 50px; margin: 0 auto 15px; display: grid; place-items: center; border-radius: 17px; background: var(--surface-2); color: var(--green); font-size: 22px; }
+    .empty strong { display: block; margin-bottom: 5px; color: var(--text); font-size: 17px; }
+    .error { color: #efb39b; }
+    .footer { padding: 30px 0 0; color: #78837b; font-size: 11px; text-align: center; }
+    .loading { animation: pulse 1.2s ease-in-out infinite alternate; }
+    @keyframes pulse { to { opacity: .45; } }
+    dialog { width: min(1100px, calc(100% - 32px)); height: min(860px, calc(100% - 32px)); max-width: none; max-height: none; padding: 0; overflow: hidden; border: 1px solid #ffffff20; border-radius: 24px; background: #0d110f; color: var(--text); box-shadow: 0 35px 100px #000b; }
+    dialog::backdrop { background: #050706d9; backdrop-filter: blur(10px); }
+    .viewer { height: 100%; display: grid; grid-template-rows: auto 1fr; }
+    .viewer-bar { display: flex; align-items: center; justify-content: space-between; gap: 15px; padding: 13px 15px 13px 19px; border-bottom: 1px solid #ffffff12; background: #141916; }
+    .viewer-heading { min-width: 0; }
+    .viewer-title { font-size: 14px; font-weight: 700; }
+    .viewer-meta { margin-top: 1px; overflow: hidden; color: var(--muted); font-size: 11px; text-overflow: ellipsis; white-space: nowrap; }
+    .viewer-actions { display: flex; gap: 8px; }
+    .viewer-action { width: 38px; height: 38px; display: grid; place-items: center; border: 1px solid #ffffff17; border-radius: 12px; background: #202722; color: var(--text); cursor: pointer; text-decoration: none; }
+    .viewer-action:hover { border-color: #ffffff35; background: #29312b; }
+    .viewer-action:focus-visible { outline: 2px solid var(--green); }
+    .viewer-action svg { width: 16px; height: 16px; }
+    .viewer-stage { min-height: 0; display: grid; place-items: center; padding: 18px; background: radial-gradient(circle at center, #1c241f, #0b0e0c 65%); }
+    .viewer-stage img { display: block; max-width: 100%; max-height: 100%; object-fit: contain; border-radius: 5px; box-shadow: 0 12px 50px #0008; }
+    @media (max-width: 640px) {
+      .shell { padding: 0 16px 45px; }
+      .topbar { padding: 18px 0; }
+      .live { max-width: 52%; text-align: right; }
+      .intro { padding: 28px 0 21px; }
+      .intro-row { align-items: start; flex-direction: column; gap: 8px; }
+      .today-count { padding: 0; }
+      .updated { text-align: left; }
+      .toolbar { margin-bottom: 22px; padding: 12px; }
+      .filters { width: 100%; display: grid; grid-template-columns: repeat(3, 1fr); }
+      .filter { padding: 8px 7px; }
+      .date-control { width: 100%; justify-content: space-between; }
+      .date-control input { flex: 1; max-width: 190px; }
+      .day-heading { margin: 25px 0 13px; }
+      .entry { grid-template-columns: 49px 1fr; gap: 14px; padding-bottom: 18px; }
+      .entry::before { left: 51px; }
+      .time { padding-top: 7px; font-size: 11px; }
+      .time::after { right: -19px; top: 12px; width: 8px; height: 8px; }
+      .event-card { border-radius: 16px; }
+      .media { max-height: 340px; aspect-ratio: 4/3; }
+      .card-info { padding: 11px 12px 13px; }
+      .card-title { font-size: 14px; }
+      .confidence { font-size: 11px; }
+      .media-tag { left: 10px; top: 10px; }
+      .open-cue { display: none; }
+      dialog { width: 100%; height: 100%; border: 0; border-radius: 0; }
+      .viewer-bar { padding-left: 14px; }
+      .viewer-stage { padding: 0; }
+      .viewer-stage img { border-radius: 0; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; transition-duration: .01ms !important; }
+    }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <header class="topbar">
+      <div class="brand">
+        <span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M3.5 10.2 12 3.5l8.5 6.7v9.3a1 1 0 0 1-1 1h-5.1v-6h-4.8v6H4.5a1 1 0 0 1-1-1v-9.3Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></span>
+        HOME / EZVIZ
+      </div>
+      <div class="live" id="connection"><span class="live-dot"></span><span id="status">Connecting to camera...</span></div>
+    </header>
+    <section class="intro">
+      <div class="eyebrow">Your camera, at a glance</div>
+      <div class="intro-row">
+        <div><h1>Home activity</h1><p>A visual record of the moments captured at your door.</p></div>
+        <div class="today-count" id="count"><strong>-</strong> moments<span class="updated" id="updated">Updating...</span></div>
+      </div>
+    </section>
+    <section class="toolbar" aria-label="Timeline controls">
+      <div class="filters" role="group" aria-label="Event type">
+        <button class="filter active" data-label="" aria-pressed="true">Everything</button>
+        <button class="filter" data-label="person" aria-pressed="false">People</button>
+        <button class="filter" data-label="cat" aria-pressed="false">Cats</button>
+      </div>
+      <label class="date-control">Show date <input type="date" id="date" aria-label="Filter events by date"></label>
+    </section>
+    <main id="events" class="timeline" aria-live="polite"><div class="empty loading">Loading your timeline...</div></main>
+    <footer class="footer">Updates automatically &middot; Select a moment to inspect the original</footer>
+  </div>
+  <dialog id="viewer" aria-labelledby="viewer-title">
+    <div class="viewer">
+      <header class="viewer-bar">
+        <div class="viewer-heading"><div class="viewer-title" id="viewer-title">Captured event</div><div class="viewer-meta" id="viewer-meta"></div></div>
+        <div class="viewer-actions">
+          <a class="viewer-action" id="viewer-original" href="#" target="_blank" rel="noopener" aria-label="Open original in a new tab"><svg viewBox="0 0 24 24" fill="none"><path d="M14 5h5v5M19 5l-8 8M19 14v4a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1h4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          <button class="viewer-action" id="viewer-close" aria-label="Close viewer"><svg viewBox="0 0 24 24" fill="none"><path d="m6 6 12 12M18 6 6 18" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button>
+        </div>
+      </header>
+      <div class="viewer-stage"><img id="viewer-media" alt=""></div>
+    </div>
+  </dialog>
+  <script>
+    let selectedLabel = '';
+    const root = document.querySelector('#events');
+    const dateInput = document.querySelector('#date');
+    const count = document.querySelector('#count');
+    const updated = document.querySelector('#updated');
+    const connection = document.querySelector('#connection');
+    const statusText = document.querySelector('#status');
+    const viewer = document.querySelector('#viewer');
+    const viewerMedia = document.querySelector('#viewer-media');
+    const viewerTitle = document.querySelector('#viewer-title');
+    const viewerMeta = document.querySelector('#viewer-meta');
+    const viewerOriginal = document.querySelector('#viewer-original');
+
+    const escapeHtml = value => String(value ?? '').replace(/[&<>"']/g, character => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[character]));
+    const parseDate = value => new Date(value.includes('T') ? value : value.replace(' ', 'T'));
+    const dayKey = value => value.slice(0, 10);
+    const timeText = value => parseDate(value).toLocaleTimeString([], {hour:'numeric', minute:'2-digit'});
+    const fullTimeText = value => parseDate(value).toLocaleString([], {weekday:'long', month:'long', day:'numeric', hour:'numeric', minute:'2-digit'});
+
+    function dayText(value) {
+      const day = parseDate(value + 'T12:00:00');
+      const today = new Date();
+      const yesterday = new Date();
+      yesterday.setDate(today.getDate() - 1);
+      const sameDay = (a, b) => a.getFullYear() === b.getFullYear() && a.getMonth() === b.getMonth() && a.getDate() === b.getDate();
+      const relative = sameDay(day, today) ? 'Today' : sameDay(day, yesterday) ? 'Yesterday' : day.toLocaleDateString(undefined, {weekday:'long'});
+      const calendar = day.toLocaleDateString(undefined, {month:'long', day:'numeric', year:day.getFullYear() === today.getFullYear() ? undefined : 'numeric'});
+      return `${relative}<span>${calendar}</span>`;
+    }
+
+    function iconMarkup(kind) {
+      if (kind === 'person') return '<svg viewBox="0 0 16 16" fill="none"><circle cx="8" cy="5" r="2.2" fill="currentColor"/><path d="M4.5 13c.2-3 1.4-4.5 3.5-4.5s3.3 1.5 3.5 4.5" fill="currentColor"/></svg>';
+      if (kind === 'cat') return '<svg viewBox="0 0 16 16" fill="none"><path d="M3.5 6 3 2.8l3 1.5a6 6 0 0 1 4 0l3-1.5-.5 3.2v3.2c0 2.5-1.8 4-4.5 4s-4.5-1.5-4.5-4V6Z" fill="currentColor"/></svg>';
+      return '<svg viewBox="0 0 16 16" fill="none"><path d="M2.5 9.5h2l1.3-5 2.4 8 1.6-5 1 2h2.7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+    }
+
+    function eventDetails(event) {
+      const activity = event.label === 'activity' || event.media_type === 'gif';
+      const kind = activity ? 'activity' : event.label === 'cat' ? 'cat' : 'person';
+      return {
+        activity,
+        kind,
+        title: activity ? 'Activity detected' : event.label === 'cat' ? 'Cat spotted' : 'Person spotted',
+        subtitle: activity ? 'A short sequence captured during movement' : 'Detected and saved by the camera',
+        url: event.media_url || (activity ? `/activity/${encodeURIComponent(event.snapshot)}` : `/snapshots/${encodeURIComponent(event.snapshot)}`),
+        metric: activity ? `${event.frame_count || 'Motion'} frames` : `${Math.round((event.confidence || 0) * 100)}% confidence`
+      };
+    }
+
+    function eventMarkup(event) {
+      const details = eventDetails(event);
+      const title = escapeHtml(details.title);
+      const time = escapeHtml(timeText(event.captured_at));
+      return `<article class="entry">
+        <div class="time">${time}</div>
+        <button class="event-card" data-url="${escapeHtml(details.url)}" data-title="${title}" data-meta="${escapeHtml(fullTimeText(event.captured_at))}" aria-label="View ${title} at ${time}">
+          <div class="media-wrap">
+            <img class="media ${details.activity ? 'activity' : ''}" loading="lazy" src="${escapeHtml(details.url)}" alt="${title} at ${time}">
+            <span class="media-tag"><span class="event-icon ${details.kind}">${iconMarkup(details.kind)}</span>${title}</span>
+            <span class="open-cue" aria-hidden="true"><svg viewBox="0 0 20 20" fill="none"><path d="M7 3H3v4M13 3h4v4M7 17H3v-4M13 17h4v-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></span>
+          </div>
+          <div class="card-info"><div class="card-title-row"><div><div class="card-title">${title}</div><div class="card-subtitle">${details.subtitle}</div></div><span class="confidence">${escapeHtml(details.metric)}</span></div></div>
+        </button>
+      </article>`;
+    }
+
+    async function loadEvents() {
+      try {
+        const query = new URLSearchParams({label:selectedLabel, date:dateInput.value});
+        const response = await fetch('/api/events?' + query);
+        if (!response.ok) throw new Error('Could not load events');
+        const rows = await response.json();
+        count.firstElementChild.textContent = rows.length;
+        count.childNodes[1].textContent = rows.length === 1 ? ' moment' : ' moments';
+        updated.textContent = `Updated ${new Date().toLocaleTimeString([], {hour:'numeric', minute:'2-digit'})}`;
+        if (!rows.length) {
+          root.innerHTML = '<div class="empty"><div class="empty-icon">-</div><strong>No moments here yet</strong>New activity will appear when your camera captures it.</div>';
+          return;
+        }
+        const groups = new Map();
+        rows.forEach(event => {
+          const key = dayKey(event.captured_at);
+          if (!groups.has(key)) groups.set(key, []);
+          groups.get(key).push(event);
+        });
+        root.innerHTML = [...groups].map(([day, events]) => `<div class="day-heading"><div class="day-label">${dayText(day)}</div><span class="day-total">${events.length} ${events.length === 1 ? 'moment' : 'moments'}</span></div><section aria-label="Events from ${escapeHtml(day)}">${events.map(eventMarkup).join('')}</section>`).join('');
+      } catch {
+        root.innerHTML = '<div class="empty error"><div class="empty-icon">!</div><strong>Timeline unavailable</strong>Could not load events. The dashboard may still be starting.</div>';
+        updated.textContent = 'Update failed';
+      }
+    }
+
+    document.querySelectorAll('.filter').forEach(button => button.addEventListener('click', () => {
+      document.querySelectorAll('.filter').forEach(item => {
+        const active = item === button;
+        item.classList.toggle('active', active);
+        item.setAttribute('aria-pressed', active);
+      });
+      selectedLabel = button.dataset.label;
+      loadEvents();
+    }));
+    dateInput.addEventListener('change', loadEvents);
+    root.addEventListener('click', event => {
+      const card = event.target.closest('.event-card');
+      if (!card) return;
+      viewerTitle.textContent = card.dataset.title;
+      viewerMeta.textContent = card.dataset.meta;
+      viewerMedia.src = card.dataset.url;
+      viewerMedia.alt = `${card.dataset.title}, ${card.dataset.meta}`;
+      viewerOriginal.href = card.dataset.url;
+      viewer.showModal();
+    });
+    document.querySelector('#viewer-close').addEventListener('click', () => viewer.close());
+    viewer.addEventListener('click', event => {
+      const bounds = viewer.getBoundingClientRect();
+      if (event.clientX < bounds.left || event.clientX > bounds.right || event.clientY < bounds.top || event.clientY > bounds.bottom) viewer.close();
+    });
+    viewer.addEventListener('close', () => {
+      viewerMedia.removeAttribute('src');
+      viewerOriginal.href = '#';
+    });
+
+    async function refreshStatus() {
+      try {
+        const response = await fetch('/api/status');
+        if (!response.ok) throw new Error();
+        const state = await response.json();
+        const online = state.camera === 'connected';
+        connection.classList.toggle('offline', !online);
+        statusText.textContent = online ? `Camera online${state.inference_ms ? ` / ${state.inference_ms} ms` : ''}` : state.camera.replaceAll('_', ' ');
+        connection.title = state.last_error || (online ? 'Camera connection is healthy' : 'Camera is not connected');
+      } catch {
+        connection.classList.add('offline');
+        statusText.textContent = 'Dashboard unavailable';
+      }
+    }
+
+    loadEvents();
+    refreshStatus();
+    setInterval(refreshStatus, 10000);
+    setInterval(loadEvents, 30000);
+  </script>
+</body>
+</html>

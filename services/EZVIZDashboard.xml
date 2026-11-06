@@ -1,0 +1,21 @@
+<service>
+  <id>EZVIZEventGallery</id>
+  <name>EZVIZ Event Gallery</name>
+  <description>Native EZVIZ dashboard, SQLite event store, and person/cat detector.</description>
+  <executable>%BASE%\..\runtime\Scripts\python.exe</executable>
+  <arguments>"%BASE%\..\service_runner.py" app.py</arguments>
+  <workingdirectory>%BASE%\..</workingdirectory>
+  <startmode>Automatic</startmode>
+  <delayedAutoStart>true</delayedAutoStart>
+  <stoptimeout>15 sec</stoptimeout>
+  <onfailure action="restart" delay="5 sec" />
+  <resetfailure>1 hour</resetfailure>
+  <logpath>%BASE%\logs</logpath>
+  <log mode="roll-by-size-time">
+    <sizeThreshold>5242880</sizeThreshold>
+    <pattern>yyyyMMdd</pattern>
+    <autoRollAtTime>00:00:00</autoRollAtTime>
+    <zipOlderThanNumDays>7</zipOlderThanNumDays>
+    <zipDateFormat>yyyyMMdd</zipDateFormat>
+  </log>
+</service>

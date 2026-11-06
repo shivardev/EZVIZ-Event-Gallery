@@ -1,0 +1,8 @@
+2026-11-06 22:42:30,282 INFO Dashboard listening on http://0.0.0.0:5000
+2026-11-06 22:42:41,359 INFO 127.0.0.1 - "GET /api/status HTTP/1.1" 200 -
+2026-11-06 22:43:01,292 INFO 127.0.0.1 - "GET /api/status HTTP/1.1" 200 -
+2026-11-06 22:44:15,125 INFO Dashboard listening on http://0.0.0.0:5000
+2026-11-06 22:45:06,087 INFO 127.0.0.1 - "GET /api/status HTTP/1.1" 200 -
+2026-11-06 22:46:25,059 INFO 127.0.0.1 - "GET /api/status HTTP/1.1" 200 -
+2026-11-06 23:04:13,475 INFO 127.0.0.1 - "GET /api/status HTTP/1.1" 200 -
+2026-11-06 23:04:13,506 INFO 127.0.0.1 - "GET /api/events HTTP/1.1" 200 -

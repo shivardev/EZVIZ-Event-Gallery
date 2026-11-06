@@ -1,0 +1,29 @@
+{
+  "camera": {
+    "name": "EZVIZ TY1",
+    "rtsp_url": "rtsp://admin:{EZVIZ_PASSWORD}@192.168.1.9:554/h264_stream"
+  },
+  "server": {
+    "host": "0.0.0.0",
+    "port": 5000
+  },
+  "detection": {
+    "confidence": 0.25,
+    "sample_seconds": 1.0,
+    "confirm_hits": 2,
+    "event_cooldown_seconds": 3,
+    "opencv_threads": 2
+  },
+  "motion": {
+    "check_interval_seconds": 0.4,
+    "minimum_changed_percent": 0.35,
+    "maximum_frame_gap_seconds": 1.0,
+    "close_after_seconds": 1.5,
+    "gif_width": 960,
+    "gif_frame_ms": 400
+  },
+  "storage": {
+    "jpeg_quality": 90,
+    "retention_days": 21
+  }
+}

@@ -1,0 +1,15 @@
+2026-11-06 22:42:16,841 DEBUG - Starting WinSW in console mode
+2026-11-06 22:42:28,311 DEBUG - Starting WinSW in console mode
+2026-11-06 22:42:28,332 INFO  - Installing service 'EZVIZ Motion GIF Worker (EZVIZMotionGif)'...
+2026-11-06 22:42:28,363 INFO  - Service 'EZVIZ Motion GIF Worker (EZVIZMotionGif)' was installed successfully.
+2026-11-06 22:42:29,078 DEBUG - Starting WinSW in console mode
+2026-11-06 22:42:29,104 INFO  - Starting service 'EZVIZ Motion GIF Worker (EZVIZMotionGif)'...
+2026-11-06 22:42:29,373 DEBUG - Starting WinSW in service mode
+2026-11-06 22:42:29,402 INFO  - Service 'EZVIZ Motion GIF Worker (EZVIZMotionGif)' started successfully.
+2026-11-06 22:42:29,429 INFO  - Starting C:\Users\Konda\Documents\EZVIZ-Event-Gallery\services\..\runtime\Scripts\python.exe "C:\Users\Konda\Documents\EZVIZ-Event-Gallery\services\..\motion_gif.py"
+2026-11-06 22:42:29,493 INFO  - Started process 8744
+2026-11-06 22:42:29,504 DEBUG - Forwarding logs of the process System.Diagnostics.Process (python) to WinSW.RollingSizeTimeLogAppender
+2026-11-06 22:44:14,805 DEBUG - Starting WinSW in service mode
+2026-11-06 22:44:14,826 INFO  - Starting C:\Users\Konda\Documents\EZVIZ-Event-Gallery\services\..\runtime\Scripts\python.exe "C:\Users\Konda\Documents\EZVIZ-Event-Gallery\services\..\motion_gif.py"
+2026-11-06 22:44:14,855 INFO  - Started process 22276
+2026-11-06 22:44:14,862 DEBUG - Forwarding logs of the process System.Diagnostics.Process (python) to WinSW.RollingSizeTimeLogAppender
